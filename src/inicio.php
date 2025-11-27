@@ -51,6 +51,17 @@ if ($idioma == "en") {
 }
 ?>
 </h1>
+<h1>
+<?php
+if ($genero == "M") {
+    echo "Eres hombre";
+}   elseif ($genero == "F"){
+    echo "Eres mujer";
+}    else {
+    echo "Eres X";
+}
+?>
+</h1>
 
 <img src="img/andy.png" class="foto-inicio">
 
