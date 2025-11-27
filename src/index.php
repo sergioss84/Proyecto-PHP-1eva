@@ -15,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $usuario = $_POST["usuario"];
     $password = $_POST["password"];
+    $genero = $_POST["genero"];
+    $_SESSION["genero"] = $genero;
 
     if ($usuario == $usuario_correcto && $password == $clave_correcta) {
         $_SESSION["intentos"] = 3;
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="post">
         <input type="text" name="usuario" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
-        <select>
+        <select name="genero">
             <option value="M">masculino</option>
             <option value="F">Femenino</option>
             <option value="X">Otro</option>

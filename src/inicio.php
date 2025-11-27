@@ -7,6 +7,9 @@ if (isset($_GET["idioma"])) {
 $idioma = $_SESSION["idioma"] ?? "es";
 
 $ver = $_GET["ver"] ?? "";
+
+$genero = $_SESSION["genero"] ?? "hombre";
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
