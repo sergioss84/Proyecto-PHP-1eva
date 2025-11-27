@@ -53,9 +53,9 @@ if ($idioma == "en") {
 </h1>
 <h1>
 <?php
-if ($genero == "M") {
+if ($value == "M") {
     echo "Eres hombre";
-}   elseif ($genero == "F"){
+}   elseif ($value == "F"){
     echo "Eres mujer";
 }    else {
     echo "Eres X";
