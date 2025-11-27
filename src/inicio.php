@@ -52,8 +52,6 @@ if ($idioma == "en") {
 ?>
 </h1>
 
-
-
 <img src="img/andy.png" class="foto-inicio">
 
 <h2><a href="?ver=info">Información</a></h2>
