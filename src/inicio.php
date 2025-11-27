@@ -32,6 +32,7 @@ $ver = $_GET["ver"] ?? "";
     <div class="header-right">
         <a href="?idioma=es"><img src="img/es.png" class="flag"></a>
         <a href="?idioma=en"><img src="img/en.png" class="flag"></a>
+        <a href="?idioma=jp"><img src="img/jp.png" class="flag"></a>
         <a class="btn" href="?modo=cambiar">🌓</a>
         <a class="btn" href="logout.php">Logout</a>
     </div>
