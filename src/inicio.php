@@ -52,11 +52,6 @@ if ($idioma == "en") {
 ?>
 </h1>
 
-<?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $username = $_POST ["genero"];
-}
-?>
 <h1>
 <?php
 if ($genero == "M") {
