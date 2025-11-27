@@ -59,6 +59,23 @@ if ($idioma == "en") {
     Samuel es tanto diseñador como fundador principal de la marca</p>
 <?php } ?>
 
+<?php
+if ($idioma == "jp") {
+    echo "情報";
+} else {
+    echo "INICIO";
+}
+?>
+</h1>
+
+<h2><a href="?ver=info">情報</a></h2>
+<?php if ($ver == "info") { ?>
+<p>私たちはセルジオとサミュエルです。最近、CØLDENという衣料品店をオープンしました。このウェブサイトは、私たち自身を世界に紹介するために作成しました。私たちは服と店、そしてそのデザインに心血を注いでいるので、皆さんの応援をお待ちしています。
+
+セルジオはブランドの株主兼マネージャーです。
+サミュエルはブランドのデザイナーであり、創設者でもあります。</p>
+<?php } ?>
+
 <h2><a href="?ver=contacto">Contacto</a></h2>
 <?php if ($ver == "contacto") { ?>
 <p>contacto@colden.es</p>
