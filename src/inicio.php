@@ -50,6 +50,16 @@ if ($idioma == "en") {
 ?>
 </h1>
 
+<h1>
+<?php
+if ($idioma == "jp") {
+    echo "情報";
+} else {
+    echo "INICIO";
+}
+?>
+</h1>
+
 <img src="img/andy.png" class="foto-inicio">
 
 <h2><a href="?ver=info">Información</a></h2>
@@ -58,6 +68,7 @@ if ($idioma == "en") {
     Sergio es el accionista y manager de la marca.
     Samuel es tanto diseñador como fundador principal de la marca</p>
 <?php } ?>
+
 
 <h2><a href="?ver=contacto">Contacto</a></h2>
 <?php if ($ver == "contacto") { ?>
