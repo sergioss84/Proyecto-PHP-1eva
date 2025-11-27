@@ -9,6 +9,7 @@ $idioma = $_SESSION["idioma"] ?? "es";
 $ver = $_GET["ver"] ?? "";
 
 $genero = $_SESSION["genero"] ?? "hombre";
+echo $genero;
 
 ?>
 <!DOCTYPE html>
