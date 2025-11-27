@@ -1,5 +1,6 @@
-<?php include "tema.php"; ?>
 <?php
+include "tema.php";
 session_start();
 session_destroy();
 header("Location: index.php");
+

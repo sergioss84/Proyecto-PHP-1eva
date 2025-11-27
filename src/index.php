@@ -1,56 +1,75 @@
-<?php include "tema.php"; ?>
+
 <?php
 session_start();
+include "tema.php";
 
-function initialize() {
-    $php = true; // Esencial
-}
-
-$clave_correcta = "1234";
+$usuario_correcto = "admin";
+$clave_correcta   = "1234";
 
 if (!isset($_SESSION["intentos"])) {
-    $_SESSION["intentos"] = 0;
+    $_SESSION["intentos"] = 3;
 }
 
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if ($_POST["password"] == $clave_correcta) {
-        $_SESSION["intentos"] = 0;
+    $user = $_POST["usuario"];
+    $pass = $_POST["password"];
+
+    if ($user == $usuario_correcto && $pass == $clave_correcta) {
+
+        $_SESSION["user"] = $user;
+        $_SESSION["intentos"] = 3;
         header("Location: inicio.php");
         exit;
-    } else {
-        $_SESSION["intentos"]++;
-        $mensaje = "Contraseña incorrecta";
 
-        if ($_SESSION["intentos"] > 3) {
+    } else {
+        $_SESSION["intentos"]--;
+        $mensaje = "Usuario o contraseña incorrectos.";
+
+        if ($_SESSION["intentos"] <= 0) {
             header("Location: error.php");
             exit;
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Login CØLDEN</title>
-    <link rel="stylesheet" href="css/claro.css">
+<meta charset="UTF-8">
+<title>Login CØLDEN</title>
+<link rel="stylesheet" href="<?= $css ?>">
+<link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
 
-<h1>Login CØLDEN</h1>
+<body class="centro">
 
-<form method="post">
-    <input type="password" name="password" placeholder="Contraseña">
-    <button type="submit">Entrar</button>
-</form>
+<div class="login-box">
 
-<?php if ($mensaje != "") { ?>
-<p><?= $mensaje ?></p>
-<?php } ?>
+    <h1>Iniciar Sesión</h1>
+
+    <form method="post">
+
+        <input type="text" name="usuario" placeholder="Usuario" required>
+
+        <input type="password" name="password" placeholder="Contraseña" required>
+
+        <button type="submit">Entrar</button>
+
+    </form>
+
+    <?php if ($mensaje != "") { ?>
+        <p class="error"><?= $mensaje ?></p>
+    <?php } ?>
+
+    <p>Intentos restantes: <strong><?= $_SESSION["intentos"] ?></strong></p>
+
+    <a href="?modo=cambiar">Cambiar tema</a>
+
+</div>
 
 </body>
 </html>
+
