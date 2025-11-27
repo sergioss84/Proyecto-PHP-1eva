@@ -1,3 +1,4 @@
+<?php include "tema.php"; ?>
 <?php
 include "tema.php";
 
