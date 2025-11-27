@@ -1,49 +1,97 @@
 <?php
 include "tema.php";
 
+$preguntas = [
+    1 => [
+        "texto" => "¿Qué protocolo se utiliza para asignar automáticamente direcciones IP?",
+        "opciones" => [
+            "a" => "DNS",
+            "b" => "DHCP",
+            "c" => "FTP"
+        ],
+        "correcta" => "b"
+    ],
+    2 => [
+        "texto" => "¿Cuál es la herramienta principal para administrar discos en Windows?",
+        "opciones" => [
+            "a" => "diskpart",
+            "b" => "ipconfig",
+            "c" => "eventvwr"
+        ],
+        "correcta" => "a"
+    ],
+    3 => [
+        "texto" => "¿Qué dirección IPv6 es equivalente al loopback 127.0.0.1 en IPv4?",
+        "opciones" => [
+            "a" => "::",
+            "b" => "::1",
+            "c" => "fe80::1"
+        ],
+        "correcta" => "b"
+    ],
+    4 => [
+        "texto" => "¿Qué comando permite ver la tabla de enrutamiento en Windows?",
+        "opciones" => [
+            "a" => "route print",
+            "b" => "ping",
+            "c" => "netstat -r"
+        ],
+        "correcta" => "a"
+    ],
+    5 => [
+        "texto" => "¿Qué tipo de copia de seguridad guarda solo los archivos modificados desde la última copia completa?",
+        "opciones" => [
+            "a" => "Completa",
+            "b" => "Diferencial",
+            "c" => "Incremental"
+        ],
+        "correcta" => "b"
+    ],
+];
+
 $puntos = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if ($_POST["p1"] == "b") $puntos++;
-    if ($_POST["p2"] == "a") $puntos++;
-    if ($_POST["p3"] == "c") $puntos++;
-    if ($_POST["p4"] == "a") $puntos++;
-    if ($_POST["p5"] == "b") $puntos++;
-    if ($_POST["p6"] == "a") $puntos++;
-    if ($_POST["p7"] == "c") $puntos++;
-    if ($_POST["p8"] == "a") $puntos++;
-    if ($_POST["p9"] == "b") $puntos++;
-    if ($_POST["p10"] == "a") $puntos++;
+    foreach ($preguntas as $num => $data) {
+        if (isset($_POST["p$num"]) && $_POST["p$num"] === $data["correcta"]) {
+            $puntos++;
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cuestionario</title>
+    <title>Cuestionario ASIR</title>
     <link rel="stylesheet" href="<?= $css ?>">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-<h1>Cuestionario ASIR</h1>
+<h1>Cuestionario ASIR - Tipo Test</h1>
 
 <form method="post">
 
-<?php for ($i=1; $i<=10; $i++) { ?>
-<p>Pregunta <?= $i ?></p>
-<input type="radio" name="p<?= $i ?>" value="a"> A
-<input type="radio" name="p<?= $i ?>" value="b"> B
-<input type="radio" name="p<?= $i ?>" value="c"> C
-<?php } ?>
+<?php foreach ($preguntas as $num => $data): ?>
+    <p><b><?= $num ?>. <?= $data["texto"] ?></b></p>
 
-<br><br>
-<button>Enviar</button>
+    <?php foreach ($data["opciones"] as $clave => $opcion): ?>
+        <label>
+            <input type="radio" name="p<?= $num ?>" value="<?= $clave ?>">
+            <?= strtoupper($clave) ?>) <?= $opcion ?>
+        </label><br>
+    <?php endforeach; ?>
+
+    <br>
+<?php endforeach; ?>
+
+<button>Enviar respuestas</button>
 </form>
 
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
-<h2>Puntuación: <?= $puntos ?>/10</h2>
-<?php } ?>
+<?php if ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
+    <h2>Puntuación obtenida: <?= $puntos ?>/<?= count($preguntas) ?></h2>
+<?php endif; ?>
 
 <br>
 <a class="btn" href="inicio.php">⬅ Volver al inicio</a>
