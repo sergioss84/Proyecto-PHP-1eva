@@ -51,11 +51,17 @@ if ($idioma == "en") {
 }
 ?>
 </h1>
+
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $username = $_POST ["genero"];
+}
+?>
 <h1>
 <?php
-if ($value == "M") {
+if ($genero == "M") {
     echo "Eres hombre";
-}   elseif ($value == "F"){
+}   elseif ($genero == "F"){
     echo "Eres mujer";
 }    else {
     echo "Eres X";
