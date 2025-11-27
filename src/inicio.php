@@ -8,7 +8,7 @@ $idioma = $_SESSION["idioma"] ?? "es";
 
 $ver = $_GET["ver"] ?? "";
 
-$genero = $_SESSION["genero"] ?? "hombre";
+$genero = $_SESSION["genero"] ?? "M";
 echo $genero;
 
 ?>
