@@ -1,0 +1,27 @@
+body {
+    font-family: Arial;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.logo {
+    width: 50px;
+}
+
+.flag {
+    width: 25px;
+}
+
+nav a {
+    margin: 0 10px;
+}
+
+main {
+    padding: 20px;
+}
