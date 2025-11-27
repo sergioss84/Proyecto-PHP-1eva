@@ -1,7 +1,6 @@
 
 <?php
-session_start();
-include "tema.php";
+include "tema.php";  // PRIMERO SIEMPRE
 
 $usuario_correcto = "admin";
 $clave_correcta   = "1234";
@@ -11,6 +10,7 @@ if (!isset($_SESSION["intentos"])) {
 }
 
 $mensaje = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
