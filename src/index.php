@@ -49,6 +49,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="usuario" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <input type="select" name="sexo" placeholder="options" required>
+        <select>
+            <option value="M">masculino</option>
+            <option value="F">Femenino</option>
+            <option value="X">Otro</option>
+        </select>
+        
         <button type="submit">Entrar</button>
     </form>
 
