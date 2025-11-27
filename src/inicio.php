@@ -1,64 +1,69 @@
 <?php
 include "tema.php";
 
-if (!isset($_SESSION["user"])) {
-    header("Location: index.php");
-    exit;
-}
-
 if (isset($_GET["idioma"])) {
     $_SESSION["idioma"] = $_GET["idioma"];
 }
-
 $idioma = $_SESSION["idioma"] ?? "es";
+
 $ver = $_GET["ver"] ?? "";
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>CØLDEN</title>
-<link rel="stylesheet" href="<?= $css ?>">
-<link rel="stylesheet" href="css/estilos.css">
+    <meta charset="UTF-8">
+    <title>CØLDEN</title>
+    <link rel="stylesheet" href="<?= $css ?>">
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
 
-<header>
-    <h1>CØLDEN</h1>
+<header class="header">
+    <div class="header-left">
+        <a href="inicio.php"><img src="img/logo1.png" class="logo"></a>
+    </div>
 
-    <a href="?idioma=es"><img src="img/es.png" width="30"></a>
-    <a href="?idioma=en"><img src="img/en.png" width="30"></a>
+    <nav class="header-center">
+        <a href="inicio.php">Inicio</a>
+        <a href="cuestionario.php">Cuestionario</a>
+    </nav>
 
-    <a href="?modo=cambiar">🌓</a>
-
-    <a href="logout.php">Logout</a>
+    <div class="header-right">
+        <a href="?idioma=es"><img src="img/es.png" class="flag"></a>
+        <a href="?idioma=en"><img src="img/en.png" class="flag"></a>
+        <a class="btn" href="?modo=cambiar">🌓</a>
+        <a class="btn" href="logout.php">Logout</a>
+    </div>
 </header>
 
-<main>
+<main class="inicio-centrado">
 
-<img src="img/logo.png" class="foto">
+<h1>
+<?php
+if ($idioma == "en") {
+    echo "HOME";
+} else {
+    echo "INICIO";
+}
+?>
+</h1>
+
+<img src="img/andy.png" class="foto-inicio">
 
 <h2><a href="?ver=info">Información</a></h2>
 <?php if ($ver == "info") { ?>
-<div class="caja">
-<p>CØLDEN es una tienda de ropa creada por Sergio y Samuel.</p>
-</div>
+<p>Somos Sergio y Samuel, hace poco hemos fundado una tienda de ropa llamada CØLDEN. Creamos esta pagina web para darnos a conocer al mundo. Esperemos que la apoyeis ya que le hemos puesto todo el cariño del mundo tanto a la ropa como a la tienda y su diseño.
+    Sergio es el accionista y manager de la marca.
+    Samuel es tanto diseñador como fundador principal de la marca</p>
 <?php } ?>
 
 <h2><a href="?ver=contacto">Contacto</a></h2>
 <?php if ($ver == "contacto") { ?>
-<div class="caja">
-<p>Email: contacto@colden.es</p>
-<p>Teléfono: 666 555 444</p>
-</div>
+<p>contacto@colden.es</p>
 <?php } ?>
-
-<h2><a href="cuestionario.php">Ir al cuestionario</a></h2>
 
 </main>
 
 </body>
 </html>
-
