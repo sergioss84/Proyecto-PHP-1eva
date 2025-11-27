@@ -44,21 +44,15 @@ $ver = $_GET["ver"] ?? "";
 <?php
 if ($idioma == "en") {
     echo "HOME";
-} else {
+}   elseif ($idioma == "jp"){
+    echo "情報";
+}    else {
     echo "INICIO";
 }
 ?>
 </h1>
 
-<h1>
-<?php
-if ($idioma == "jp") {
-    echo "情報";
-} else {
-    echo "INICIO";
-}
-?>
-</h1>
+
 
 <img src="img/andy.png" class="foto-inicio">
 
