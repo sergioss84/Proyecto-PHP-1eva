@@ -4,7 +4,6 @@ include "tema.php";
 
 if (!isset($_SESSION["intentos"])) header("Location: index.php");
 
-// Preguntas sobre PHP y Docker
 $preguntas = [
     1 => [
         "texto" => "¿Qué significa PHP?",
@@ -75,7 +74,6 @@ $preguntas = [
 
 $puntos = 0;
 
-// Evaluación
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     foreach($preguntas as $num => $p){
         $resp = $_POST["p$num"] ?? [];

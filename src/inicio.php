@@ -2,19 +2,19 @@
 session_start();
 include "tema.php";
 
-// Protección: solo usuarios logueados
+
 if (!isset($_SESSION["intentos"])) {
     header("Location: index.php");
     exit;
 }
 
-// Gestión de idioma
+
 if (isset($_GET["idioma"])) {
     $_SESSION["idioma"] = $_GET["idioma"];
 }
 $idioma = $_SESSION["idioma"] ?? "es";
 
-// Sección a mostrar
+
 $ver = $_GET["ver"] ?? "";
 ?>
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ $ver = $_GET["ver"] ?? "";
         } elseif ($idioma == "jp") {
             echo "ホーム";
         } else {
-            echo "INICIO"; // idioma por defecto
+            echo "INICIO"; 
         }
         ?>
         </a>
@@ -69,7 +69,7 @@ if ($idioma == "es") {
 } elseif ($idioma == "jp") {
     echo "ホーム";
 } else {
-    echo "INICIO"; // idioma por defecto
+    echo "INICIO";
 }
 ?>
 </h1>
