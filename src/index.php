@@ -13,9 +13,9 @@ $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $usuario = $_POST["usuario"];
-    $password = $_POST["password"];
-    $genero = $_POST["genero"];
+    $usuario = $_POST["usuario"] ?? "";
+    $password = $_POST["password"] ?? "";
+    $genero = $_POST["genero"] ?? "";
     $_SESSION["genero"] = $genero;
 
     if ($usuario == $usuario_correcto && $password == $clave_correcta) {
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="usuario" placeholder="Usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
         <select name="genero">
-            <option value="M">masculino</option>
+            <option value="M">Masculino</option>
             <option value="F">Femenino</option>
             <option value="X">Otro</option>
         </select>
@@ -61,10 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <p class="intentos">Intentos restantes: <?= $_SESSION["intentos"] ?></p>
 
-    <?php if ($mensaje != "") { ?>
+    <?php if ($mensaje != ""): ?>
         <p class="error"><?= $mensaje ?></p>
-    <?php } ?>
-
+    <?php endif; ?>
 
 </div>
 

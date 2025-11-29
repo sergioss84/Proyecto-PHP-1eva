@@ -1,7 +1,7 @@
 <?php
 session_start();
-include "tema.php";
 session_destroy();
+include "tema.php";
 ?>
 <!DOCTYPE html>
 <html>

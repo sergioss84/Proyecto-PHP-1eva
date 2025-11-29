@@ -1,4 +1,29 @@
 body {
-    background: white;
-    color: black;
+    background: #ffffff;
+    color: #000000;
 }
+
+.login-container {
+    background: #f9f9f9;
+    border: 1px solid #000;
+}
+
+.login-container input {
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #000;
+}
+
+.login-container button, .btn {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
+}
+
+.header {
+    background: #f0f0f0;
+    border-bottom: 1px solid #000;
+}
+
+a { color: #000000; }
+a:hover { text-decoration: underline; }

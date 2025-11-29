@@ -4,16 +4,14 @@ body {
     min-height: 100vh;
 }
 
-/* ---------------- LOGIN ---------------- */
-
+/* LOGIN */
 .login-container {
-    width: 320px;
+    width: 90%;
+    max-width: 320px;
     margin: 120px auto;
     padding: 25px;
-    border: 1px solid black;
     border-radius: 12px;
     text-align: center;
-    background-color: white;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.4);
 }
 
@@ -26,7 +24,6 @@ body {
     padding: 10px;
     margin: 10px 0;
     border-radius: 6px;
-    border: 1px solid gray;
 }
 
 .login-container button {
@@ -34,14 +31,7 @@ body {
     padding: 10px;
     margin-top: 15px;
     border-radius: 6px;
-    border: none;
-    background-color: black;
-    color: white;
     cursor: pointer;
-}
-
-.login-container button:hover {
-    opacity: 0.8;
 }
 
 .intentos {
@@ -54,14 +44,12 @@ body {
     margin-top: 10px;
 }
 
-/* ---------------- HEADER ---------------- */
-
+/* HEADER */
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    border-bottom: 1px solid black;
 }
 
 .header-left,
@@ -77,33 +65,26 @@ body {
     font-weight: bold;
 }
 
-/* ---------------- LOGO ---------------- */
+/* LOGO */
+.logo { width: 50px; }
 
-.logo {
-    width: 50px;
-}
-
-/* ---------------- BANDERAS ---------------- */
-
+/* BANDERAS */
 .flag {
     width: 28px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-/* ---------------- BOTONES ---------------- */
-
+/* BOTONES */
 .btn {
     margin-left: 10px;
     text-decoration: none;
     padding: 6px 12px;
-    border: 1px solid black;
     border-radius: 6px;
     font-size: 14px;
 }
 
-/* ---------------- INICIO ---------------- */
-
+/* INICIO */
 .inicio-centrado {
     text-align: center;
     margin-top: 40px;

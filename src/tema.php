@@ -1,7 +1,9 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_GET["modo"])) {
-
     if (!isset($_SESSION["modo"])) {
         $_SESSION["modo"] = "oscuro";
     } else if ($_SESSION["modo"] == "claro") {
