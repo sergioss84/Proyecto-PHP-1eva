@@ -2,11 +2,7 @@
 session_start();
 include "tema.php";
 
-// Protección: solo usuarios logueados
-if (!isset($_SESSION["intentos"])) {
-    header("Location: index.php");
-    exit;
-}
+if (!isset($_SESSION["intentos"])) header("Location: index.php");
 
 // Preguntas sobre PHP y Docker
 $preguntas = [
@@ -74,27 +70,20 @@ $preguntas = [
             "d" => "Fácil despliegue en producción"
         ],
         "correcta" => ["a","b","d"]
-    ],
-];
+    ]
+]; 
 
 $puntos = 0;
 
 // Evaluación
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    foreach ($preguntas as $num => $data) {
-        $tipo = $data["tipo"];
-        if ($tipo == "radio" || $tipo == "select") {
-            if (isset($_POST["p$num"]) && $_POST["p$num"] === $data["correcta"]) {
-                $puntos++;
-            }
-        } elseif ($tipo == "checkbox") {
-            $respuesta = $_POST["p$num"] ?? [];
-            sort($respuesta);
-            $correcta = $data["correcta"];
-            sort($correcta);
-            if ($respuesta == $correcta) {
-                $puntos++;
-            }
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    foreach($preguntas as $num => $p){
+        $resp = $_POST["p$num"] ?? [];
+        if($p["tipo"]=="checkbox"){
+            sort($resp); $c = $p["correcta"]; sort($c);
+            if($resp==$c) $puntos++;
+        } else {
+            if($resp==$p["correcta"]) $puntos++;
         }
     }
 }
@@ -102,23 +91,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Cuestionario PHP y Docker</title>
-    <link rel="stylesheet" href="<?= $css ?>">
-    <link rel="stylesheet" href="css/estilos.css">
+<meta charset="UTF-8">
+<title>Cuestionario PHP y Docker</title>
+<link rel="stylesheet" href="<?= $css ?>">
+<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-<h1>Cuestionario PHP y Docker - 10 preguntas</h1>
-
+<h1>Cuestionario PHP y Docker</h1>
 <form method="post">
 
-<?php foreach ($preguntas as $num => $data): ?>
-    <p><b><?= $num ?>. <?= $data["texto"] ?></b></p>
+<?php foreach($preguntas as $num => $p): ?>
+<p><b><?= $num ?>. <?= $p["texto"] ?></b></p>
 
-    <?php if($data["tipo"] == "radio"): ?>
-        <?php foreach($data["opciones"] as $clave => $opcion): ?>
-            <label>
-                <input type="radio" name="p<?= $num ?>" value="<?= $clave ?>" required>
-                <?= strtoupper($clave)
+<?php if($p["tipo"]=="radio"): ?>
+    <?php foreach($p["opciones"] as $k=>$o): ?>
+        <label><input type="radio" name="p<?= $num ?>" value="<?= $k ?>" required> <?= strtoupper($k) ?>) <?= $o ?></label><br>
+    <?php endforeach; ?>
 
+<?php elseif($p["tipo"]=="checkbox"): ?>
+    <?php foreach($p["opciones"] as $k=>$o): ?>
+        <label><input type="checkbox" name="p<?= $num ?>[]" value="<?= $k ?>"> <?= strtoupper($k) ?>) <?= $o ?></label><br>
+    <?php endforeach; ?>
+
+<?php elseif($p["tipo"]=="select"): ?>
+    <select name="p<?= $num ?>" required>
+        <option value="">--Selecciona--</option>
+        <?php foreach($p["opciones"] as $k=>$o): ?>
+            <option value="<?= $k ?>"><?= $o ?></option>
+        <?php endforeach; ?>
+    </select>
+<?php endif; ?>
+
+<br>
+<?php endforeach; ?>
+
+<button>Enviar respuestas</button>
+</form>
+
+<?php if($_SERVER["REQUEST_METHOD"]=="POST"): ?>
+<h2>Puntuación: <?= $puntos ?>/<?= count($preguntas) ?></h2>
+<?php endif; ?>
+
+<br>
+<a class="btn" href="inicio.php">⬅ Volver al inicio</a>
+<a class="btn" href="?modo=cambiar">🌓 Cambiar tema</a>
+
+</body>
+</html>
