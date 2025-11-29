@@ -8,73 +8,78 @@ if (!isset($_SESSION["intentos"])) {
     exit;
 }
 
-// Definimos preguntas
+// Preguntas sobre PHP y Docker
 $preguntas = [
     1 => [
-        "texto" => "¿Qué protocolo se utiliza para asignar automáticamente direcciones IP?",
+        "texto" => "¿Qué significa PHP?",
         "tipo" => "radio",
-        "opciones" => ["a" => "DNS", "b" => "DHCP", "c" => "FTP"],
-        "correcta" => "b"
+        "opciones" => ["a" => "Personal Home Page", "b" => "Private Hypertext Processor", "c" => "PHP: Hypertext Preprocessor"],
+        "correcta" => "c"
     ],
     2 => [
-        "texto" => "¿Cuál es la herramienta principal para administrar discos en Windows?",
-        "tipo" => "radio",
-        "opciones" => ["a" => "diskpart", "b" => "ipconfig", "c" => "eventvwr"],
-        "correcta" => "a"
-    ],
-    3 => [
-        "texto" => "Selecciona los tipos de copia de seguridad que existen:",
+        "texto" => "Selecciona las versiones de PHP actualmente soportadas:",
         "tipo" => "checkbox",
-        "opciones" => ["a" => "Completa", "b" => "Diferencial", "c" => "Incremental", "d" => "Diaria"],
-        "correcta" => ["a","b","c"] // checkbox puede tener varias correctas
-    ],
-    4 => [
-        "texto" => "¿Qué comando permite ver la tabla de enrutamiento en Windows?",
-        "tipo" => "radio",
-        "opciones" => ["a" => "route print", "b" => "ping", "c" => "netstat -r"],
-        "correcta" => "a"
-    ],
-    5 => [
-        "texto" => "Selecciona el sistema operativo de Microsoft Server:",
-        "tipo" => "select",
-        "opciones" => ["a" => "Windows 10", "b" => "Windows Server 2019", "c" => "Ubuntu"],
-        "correcta" => "b"
-    ],
-    6 => [
-        "texto" => "¿Qué dirección IPv6 es equivalente al loopback 127.0.0.1?",
-        "tipo" => "radio",
-        "opciones" => ["a" => "::", "b" => "::1", "c" => "fe80::1"],
-        "correcta" => "b"
-    ],
-    7 => [
-        "texto" => "Selecciona los comandos de red en Windows:",
-        "tipo" => "checkbox",
-        "opciones" => ["a" => "ipconfig", "b" => "netstat", "c" => "ls", "d" => "ping"],
+        "opciones" => ["a" => "PHP 7.4", "b" => "PHP 8.0", "c" => "PHP 5.6", "d" => "PHP 8.2"],
         "correcta" => ["a","b","d"]
     ],
-    8 => [
-        "texto" => "¿Qué es DHCP?",
+    3 => [
+        "texto" => "¿Qué comando se usa para ejecutar un contenedor Docker?",
+        "tipo" => "radio",
+        "opciones" => ["a" => "docker start <nombre>", "b" => "docker run <imagen>", "c" => "docker init <imagen>"],
+        "correcta" => "b"
+    ],
+    4 => [
+        "texto" => "Selecciona las imágenes oficiales de PHP en Docker Hub:",
+        "tipo" => "checkbox",
+        "opciones" => ["a" => "php:8.1-apache", "b" => "php:7.4-fpm", "c" => "node:14", "d" => "mysql:8"],
+        "correcta" => ["a","b"]
+    ],
+    5 => [
+        "texto" => "¿Cuál es la forma correcta de incrustar PHP en HTML?",
         "tipo" => "select",
-        "opciones" => ["a" => "Protocolo de correo", "b" => "Protocolo de asignación de IP", "c" => "Servidor web"],
+        "opciones" => ["a" => "<?php ... ?>", "b" => "<script> ... </script>", "c" => "{{ ... }}"],
+        "correcta" => "a"
+    ],
+    6 => [
+        "texto" => "¿Qué comando se usa para ver los contenedores activos en Docker?",
+        "tipo" => "radio",
+        "opciones" => ["a" => "docker ps", "b" => "docker ls", "c" => "docker active"],
+        "correcta" => "a"
+    ],
+    7 => [
+        "texto" => "Selecciona las funciones de PHP para trabajar con arrays:",
+        "tipo" => "checkbox",
+        "opciones" => ["a" => "array_merge()", "b" => "explode()", "c" => "array_push()", "d" => "implode()"],
+        "correcta" => ["a","c","d"]
+    ],
+    8 => [
+        "texto" => "¿Qué archivo se utiliza para construir imágenes Docker?",
+        "tipo" => "select",
+        "opciones" => ["a" => "dockerfile", "b" => "Dockerfile", "c" => "docker-compose.yml"],
         "correcta" => "b"
     ],
     9 => [
-        "texto" => "¿Qué tipo de backup guarda solo los archivos modificados desde la última completa?",
+        "texto" => "¿Cuál es el puerto por defecto de un contenedor PHP con Apache en Docker?",
         "tipo" => "radio",
-        "opciones" => ["a" => "Completa", "b" => "Diferencial", "c" => "Incremental"],
-        "correcta" => "b"
+        "opciones" => ["a" => "80", "b" => "443", "c" => "8080"],
+        "correcta" => "a"
     ],
     10 => [
-        "texto" => "Selecciona los servicios de red principales:",
+        "texto" => "Selecciona los beneficios de usar Docker con PHP:",
         "tipo" => "checkbox",
-        "opciones" => ["a" => "DNS", "b" => "FTP", "c" => "HTTP", "d" => "Photoshop"],
-        "correcta" => ["a","b","c"]
+        "opciones" => [
+            "a" => "Portabilidad de aplicaciones",
+            "b" => "Aislamiento de entornos",
+            "c" => "Mayor rendimiento que código nativo",
+            "d" => "Fácil despliegue en producción"
+        ],
+        "correcta" => ["a","b","d"]
     ],
 ];
 
 $puntos = 0;
 
-// Evaluación del cuestionario
+// Evaluación
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($preguntas as $num => $data) {
         $tipo = $data["tipo"];
@@ -98,13 +103,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cuestionario ASIR - 10 preguntas</title>
+    <title>Cuestionario PHP y Docker</title>
     <link rel="stylesheet" href="<?= $css ?>">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
 
-<h1>Cuestionario ASIR - 10 preguntas</h1>
+<h1>Cuestionario PHP y Docker - 10 preguntas</h1>
 
 <form method="post">
 
@@ -115,41 +120,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php foreach($data["opciones"] as $clave => $opcion): ?>
             <label>
                 <input type="radio" name="p<?= $num ?>" value="<?= $clave ?>" required>
-                <?= strtoupper($clave) ?>) <?= $opcion ?>
-            </label><br>
-        <?php endforeach; ?>
-
-    <?php elseif($data["tipo"] == "checkbox"): ?>
-        <?php foreach($data["opciones"] as $clave => $opcion): ?>
-            <label>
-                <input type="checkbox" name="p<?= $num ?>[]" value="<?= $clave ?>">
-                <?= strtoupper($clave) ?>) <?= $opcion ?>
-            </label><br>
-        <?php endforeach; ?>
-
-    <?php elseif($data["tipo"] == "select"): ?>
-        <select name="p<?= $num ?>" required>
-            <option value="">--Selecciona--</option>
-            <?php foreach($data["opciones"] as $clave => $opcion): ?>
-                <option value="<?= $clave ?>"><?= $opcion ?></option>
-            <?php endforeach; ?>
-        </select>
-    <?php endif; ?>
-
-    <br>
-<?php endforeach; ?>
-
-<button>Enviar respuestas</button>
-</form>
-
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
-    <h2>Puntuación obtenida: <?= $puntos ?>/<?= count($preguntas) ?></h2>
-<?php endif; ?>
-
-<br>
-<a class="btn" href="inicio.php">⬅ Volver al inicio</a>
-<a class="btn" href="?modo=cambiar">🌓 Cambiar tema</a>
-
-</body>
-</html>
+                <?= strtoupper($clave)
 

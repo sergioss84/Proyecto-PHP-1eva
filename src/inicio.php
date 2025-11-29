@@ -1,26 +1,30 @@
 <?php
+session_start();
 include "tema.php";
 
+// Protección: solo usuarios logueados
+if (!isset($_SESSION["intentos"])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Gestión de idioma
 if (isset($_GET["idioma"])) {
     $_SESSION["idioma"] = $_GET["idioma"];
 }
 $idioma = $_SESSION["idioma"] ?? "es";
 
+// Sección a mostrar
 $ver = $_GET["ver"] ?? "";
-
-$genero = $_SESSION["genero"] ?? "M";
-echo $genero;
-
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?= $idioma ?>">
 <head>
     <meta charset="UTF-8">
     <title>CØLDEN</title>
     <link rel="stylesheet" href="<?= $css ?>">
     <link rel="stylesheet" href="css/estilos.css">
 </head>
-
 <body>
 
 <header class="header">
@@ -29,7 +33,19 @@ echo $genero;
     </div>
 
     <nav class="header-center">
-        <a href="inicio.php">Inicio</a>
+        <a href="inicio.php">
+        <?php
+        if ($idioma == "es") {
+            echo "INICIO";
+        } elseif ($idioma == "en") {
+            echo "HOME";
+        } elseif ($idioma == "jp") {
+            echo "ホーム";
+        } else {
+            echo "INICIO"; // idioma por defecto
+        }
+        ?>
+        </a>
         <a href="cuestionario.php">Cuestionario</a>
     </nav>
 
@@ -46,42 +62,58 @@ echo $genero;
 
 <h1>
 <?php
-if ($idioma == "en") {
-    echo "HOME";
-}   elseif ($idioma == "jp"){
-    echo "情報";
-}    else {
+if ($idioma == "es") {
     echo "INICIO";
-}
-?>
-</h1>
-
-<h1>
-<?php
-if ($genero == "M") {
-    echo "Eres hombre";
-}   elseif ($genero == "F"){
-    echo "Eres mujer";
-}    else {
-    echo "Eres X";
+} elseif ($idioma == "en") {
+    echo "HOME";
+} elseif ($idioma == "jp") {
+    echo "ホーム";
+} else {
+    echo "INICIO"; // idioma por defecto
 }
 ?>
 </h1>
 
 <img src="img/andy.png" class="foto-inicio">
 
-<h2><a href="?ver=info">Información</a></h2>
-<?php if ($ver == "info") { ?>
-<p>Somos Sergio y Samuel, hace poco hemos fundado una tienda de ropa llamada CØLDEN. Creamos esta pagina web para darnos a conocer al mundo. Esperemos que la apoyeis ya que le hemos puesto todo el cariño del mundo tanto a la ropa como a la tienda y su diseño.
-    Sergio es el accionista y manager de la marca.
-    Samuel es tanto diseñador como fundador principal de la marca</p>
-<?php } ?>
+<h2><a href="?ver=info">
+<?php
+if ($idioma == "es") {
+    echo "Información";
+} elseif ($idioma == "en") {
+    echo "Information";
+} elseif ($idioma == "jp") {
+    echo "情報";
+} else {
+    echo "Información";
+}
+?>
+</a></h2>
+<?php if ($ver == "info"): ?>
+<p>
+Somos Sergio y Samuel, hace poco hemos fundado una tienda de ropa llamada CØLDEN.<br><br>
+Creamos esta página web para darnos a conocer al mundo. Esperemos que la apoyeis ya que le hemos puesto todo el cariño del mundo tanto a la ropa como a la tienda y su diseño.<br><br>
+Sergio es el accionista y manager de la marca.<br>
+Samuel es tanto diseñador como fundador principal de la marca.
+</p>
+<?php endif; ?>
 
-
-<h2><a href="?ver=contacto">Contacto</a></h2>
-<?php if ($ver == "contacto") { ?>
+<h2><a href="?ver=contacto">
+<?php
+if ($idioma == "es") {
+    echo "Contacto";
+} elseif ($idioma == "en") {
+    echo "Contact";
+} elseif ($idioma == "jp") {
+    echo "連絡先";
+} else {
+    echo "Contacto";
+}
+?>
+</a></h2>
+<?php if ($ver == "contacto"): ?>
 <p>contacto@colden.es</p>
-<?php } ?>
+<?php endif; ?>
 
 </main>
 
